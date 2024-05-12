@@ -85,7 +85,7 @@ class Style {
       this.isExpanded,
       this.alignment,
       this.textStyle,
-      this.pressEffect = false,
+      this.pressEffect,
       this.hoverColor,
       this.activeColor});
 }

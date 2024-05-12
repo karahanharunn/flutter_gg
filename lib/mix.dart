@@ -53,6 +53,7 @@ Style mixStyles(List<Style> styles) {
       crossAxisAlignment: style.crossAxisAlignment,
       mainAxisAlignment: style.mainAxisAlignment,
       direction: style.direction,
+      pressEffect: style.pressEffect ?? result.pressEffect,
     );
   }
 

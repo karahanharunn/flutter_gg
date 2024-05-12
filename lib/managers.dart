@@ -12,8 +12,9 @@ Widget flexManager({required Style props, required List<Widget> children}) {
 }
 
 Widget sizeManager({required Style style, required Widget widget}) {
-  if (style.height != null || style.width != null)
-    widget = size(widget, style.height, style.width);
+  if (style.height != null || style.width != null) {
+    return size(widget, style.height, style.width);
+  }
   return widget;
 }
 
@@ -21,8 +22,9 @@ Widget positionManager({required Style style, required Widget widget}) {
   if (style.left != null ||
       style.right != null ||
       style.top != null ||
-      style.bottom != null)
-    widget = position(widget, style.left, style.right, style.top, style.bottom);
+      style.bottom != null) {
+    return position(widget, style.left, style.right, style.top, style.bottom);
+  }
   return widget;
 }
 
@@ -34,7 +36,7 @@ Widget paddingManager({required Style style, required Widget widget}) {
       style.pr != null ||
       style.pl != null ||
       style.p != null;
-  if (isPaddingExist) widget = padding(widget, style);
+  if (isPaddingExist) return padding(widget, style);
   return widget;
 }
 
@@ -46,7 +48,7 @@ Widget marginManager({required Style style, required Widget widget}) {
       style.mr != null ||
       style.ml != null ||
       style.m != null;
-  if (isPaddingExist) widget = margin(widget, style);
+  if (isPaddingExist) return margin(widget, style);
   return widget;
 }
 
@@ -56,7 +58,7 @@ Widget decorationManager({required Style style, required Widget widget}) {
       style.isRounded != null ||
       style.gradient != null ||
       style.boxShadow != null;
-  if (isDecorationExist) widget = decoration(widget, style);
+  if (isDecorationExist) return decoration(widget, style);
   return widget;
 }
 
@@ -65,21 +67,21 @@ Widget clickManager(
     required Widget widget,
     onTap,
     ButtonProps props = const ButtonProps()}) {
-  if (onTap != null) widget = click(widget, onTap, style, props);
+  if (onTap != null) return click(widget, onTap, style, props);
   return widget;
 }
 
 Widget alignManager({required Style style, required Widget widget}) {
-  if (style.alignment != null) widget = align(widget, style.alignment!);
+  if (style.alignment != null) return align(widget, style.alignment!);
   return widget;
 }
 
 Widget centerManager({required Style style, required Widget widget}) {
-  if (style.isCenter == true) widget = center(widget);
+  if (style.isCenter == true) return center(widget);
   return widget;
 }
 
 Widget expandManager({required Style style, required Widget widget}) {
-  if (style.isExpanded == true) widget = expanded(widget);
+  if (style.isExpanded == true) return expanded(widget);
   return widget;
 }

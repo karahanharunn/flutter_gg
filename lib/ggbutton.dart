@@ -104,6 +104,14 @@ Widget iconManager(
     CrossAxisAlignment crossAxisAlignment,
     Widget? topChild,
     Widget? bottomChild) {
+  if (leftChild == null &&
+      rightChild == null &&
+      topChild == null &&
+      bottomChild == null) {
+    return flexManager(
+        props: style, children: children.length > 1 ? children : [widget]);
+  }
+
   if (leftChild != null || rightChild != null) {
     if (leftChild != null) {
       children.add(leftChild);
@@ -114,11 +122,13 @@ Widget iconManager(
       children.add(SizedBox(width: gap));
       children.add(rightChild);
     }
-    widget = Row(
+    return Row(
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment,
         children: children);
-  } else if (topChild != null || bottomChild != null) {
+  }
+
+  if (topChild != null || bottomChild != null) {
     if (topChild != null) {
       children.add(topChild);
       children.add(SizedBox(height: gap));
@@ -128,12 +138,11 @@ Widget iconManager(
       children.add(SizedBox(height: gap));
       children.add(bottomChild);
     }
-    widget = Column(
+    return Column(
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment,
         children: children);
-  } else
-    widget = flexManager(props: style, children: children);
+  }
 
   return widget;
 }
