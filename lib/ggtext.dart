@@ -33,13 +33,5 @@ Widget ggtext(
   );
 
   widget = flexManager(props: styleProps, children: [widget]);
-  widget = paddingManager(style: styleProps, widget: widget);
-  widget = expandManager(style: styleProps, widget: widget);
-  widget = sizeManager(style: styleProps, widget: widget);
-  widget = positionManager(style: styleProps, widget: widget);
-  widget = decorationManager(style: styleProps, widget: widget);
-  widget = alignManager(style: styleProps, widget: widget);
-  widget = marginManager(style: styleProps, widget: widget);
-  widget = centerManager(style: styleProps, widget: widget);
-  return widget;
+  return runManagerList(style: styleProps, widgetOld: widget);
 }

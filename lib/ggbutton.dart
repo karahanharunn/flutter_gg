@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gg/managers.dart';
-import 'package:flutter_gg/types.dart';
-import 'package:flutter_gg/types/ButtonProps.dart';
+import 'package:flutter_gg/index.dart';
 
 Widget ggbutton(
     {required Style style,
     String text = "",
+    List<Widget> children = const [],
     Widget? leftChild,
     Widget? rightChild,
     Widget? topChild,
@@ -40,11 +39,8 @@ Widget ggbutton(
     bool autofocus = false,
     MaterialStatesController? statesController,
     Duration? hoverDuration,
-    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.center,
-    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
     double gap = 8}) {
-  Widget widget = Text(text, style: style.textStyle);
-  List<Widget> children = [];
+  Widget widget;
 
   ButtonProps props = ButtonProps(
     onDoubleTap: onDoubleTap,
@@ -77,72 +73,12 @@ Widget ggbutton(
     overlayColor: overlayColor,
   );
 
-  widget = iconManager(style, leftChild, rightChild, children, gap, widget,
-      mainAxisAlignment, crossAxisAlignment, topChild, bottomChild);
-
-  widget = paddingManager(style: style, widget: widget);
-  widget = expandManager(style: style, widget: widget);
-  widget = sizeManager(style: style, widget: widget);
-  widget = positionManager(style: style, widget: widget);
-  widget = decorationManager(style: style, widget: widget);
-  widget =
-      clickManager(style: style, widget: widget, onTap: onTap, props: props);
-  widget = alignManager(style: style, widget: widget);
-  widget = marginManager(style: style, widget: widget);
-  widget = centerManager(style: style, widget: widget);
-  return widget;
-}
-
-Widget iconManager(
-    Style style,
-    Widget? leftChild,
-    Widget? rightChild,
-    List<Widget> children,
-    double gap,
-    Widget widget,
-    MainAxisAlignment mainAxisAlignment,
-    CrossAxisAlignment crossAxisAlignment,
-    Widget? topChild,
-    Widget? bottomChild) {
-  if (leftChild == null &&
-      rightChild == null &&
-      topChild == null &&
-      bottomChild == null) {
-    return flexManager(
-        props: style, children: children.length > 1 ? children : [widget]);
+  if (children.isNotEmpty) {
+    widget = flexManager(props: style, children: children);
+  } else {
+    widget = iconManager(
+        style, leftChild, rightChild, gap, text, topChild, bottomChild);
   }
-
-  if (leftChild != null || rightChild != null) {
-    if (leftChild != null) {
-      children.add(leftChild);
-      children.add(SizedBox(width: gap));
-    }
-    children.add(widget);
-    if (rightChild != null) {
-      children.add(SizedBox(width: gap));
-      children.add(rightChild);
-    }
-    return Row(
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
-        children: children);
-  }
-
-  if (topChild != null || bottomChild != null) {
-    if (topChild != null) {
-      children.add(topChild);
-      children.add(SizedBox(height: gap));
-    }
-    children.add(widget);
-    if (bottomChild != null) {
-      children.add(SizedBox(height: gap));
-      children.add(bottomChild);
-    }
-    return Column(
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
-        children: children);
-  }
-
-  return widget;
+  return runManagerList(
+      style: style, widgetOld: widget, onTap: onTap, props: props);
 }

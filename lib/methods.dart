@@ -2,16 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gg/index.dart';
-
-Widget flex({required Style style, List<Widget> children = const []}) {
-  if (style.direction != null) {
-    if (style.direction == FlexDirection.row) {
-      return row(children, style);
-    }
-    return column(children, style);
-  }
-  return column(children, style);
-}
+import 'package:flutter_gg/utils/prepareTextWidget.dart';
 
 Widget padding(Widget widget, Style style) {
   double r = (style.p ?? 0) + (style.px ?? 0) + (style.pr ?? 0);
@@ -41,9 +32,7 @@ Widget center(Widget widget) {
 }
 
 Widget expanded(Widget widget) {
-  return Expanded(
-    child: widget,
-  );
+  return Expanded(child: widget);
 }
 
 Widget decoration(Widget widget, Style props) {
@@ -113,18 +102,14 @@ Widget position(
   );
 }
 
-Widget column(List<Widget> children, Style props) {
-  return Column(
-      children: children,
-      crossAxisAlignment: props.crossAxisAlignment,
-      mainAxisAlignment: props.mainAxisAlignment);
-}
-
-Widget row(List<Widget> children, Style props) {
-  return Row(
-      children: children,
-      crossAxisAlignment: props.crossAxisAlignment,
-      mainAxisAlignment: props.mainAxisAlignment);
+Widget flex(List<Widget> children, Style props) {
+  return Flex(
+    children: children,
+    direction:
+        props.direction == FlexDirection.row ? Axis.horizontal : Axis.vertical,
+    crossAxisAlignment: props.crossAxisAlignment ?? CrossAxisAlignment.start,
+    mainAxisAlignment: props.mainAxisAlignment ?? MainAxisAlignment.start,
+  );
 }
 
 Widget rounded(Widget widget) {
@@ -166,4 +151,60 @@ Widget click(Widget widget, onClick, Style style, ButtonProps props) {
     onSecondaryTapCancel: props.onSecondaryTapCancel,
     child: widget,
   );
+}
+
+Widget iconManager(Style style, Widget? leftChild, Widget? rightChild,
+    double gap, String text, Widget? topChild, Widget? bottomChild) {
+  List<Widget> children = [];
+
+  Widget widget = prepareTextWidget(style, text);
+
+  if (leftChild != null || rightChild != null) {
+    if (leftChild != null) {
+      children.add(leftChild);
+      if (text != "") {
+        children.add(SizedBox(width: gap));
+        children.add(widget);
+      }
+    }
+    if (rightChild != null) {
+      if (text != "") {
+        children.add(widget);
+        children.add(SizedBox(width: gap));
+      }
+      children.add(rightChild);
+    }
+    return Row(
+        mainAxisAlignment: style.mainAxisAlignment ?? MainAxisAlignment.center,
+        crossAxisAlignment:
+            style.crossAxisAlignment ?? CrossAxisAlignment.center,
+        children: children);
+  }
+
+  if (topChild != null || bottomChild != null) {
+    if (topChild != null) {
+      children.add(topChild);
+      if (text != "") {
+        children.add(SizedBox(height: gap));
+        children.add(widget);
+      }
+    }
+    if (bottomChild != null) {
+      if (text != "") {
+        children.add(widget);
+        children.add(SizedBox(height: gap));
+      }
+      children.add(bottomChild);
+    }
+    return Column(
+        mainAxisAlignment: style.mainAxisAlignment ?? MainAxisAlignment.center,
+        crossAxisAlignment:
+            style.crossAxisAlignment ?? CrossAxisAlignment.center,
+        children: children);
+  }
+
+  return Row(
+      mainAxisAlignment: style.mainAxisAlignment ?? MainAxisAlignment.center,
+      crossAxisAlignment: style.crossAxisAlignment ?? CrossAxisAlignment.center,
+      children: [widget]);
 }

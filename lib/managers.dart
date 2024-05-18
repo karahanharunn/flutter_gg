@@ -6,9 +6,10 @@ import 'package:flutter_gg/types.dart';
 import 'package:flutter_gg/types/ButtonProps.dart';
 
 Widget flexManager({required Style props, required List<Widget> children}) {
-  return (children.length > 1 || props.direction != null)
-      ? flex(style: props, children: children)
-      : children[0];
+  if (children.length > 1 || props.direction != null) {
+    return flex(children, props);
+  }
+  return children[0];
 }
 
 Widget sizeManager({required Style style, required Widget widget}) {
@@ -83,5 +84,23 @@ Widget centerManager({required Style style, required Widget widget}) {
 
 Widget expandManager({required Style style, required Widget widget}) {
   if (style.isExpanded == true) return expanded(widget);
+  return widget;
+}
+
+Widget runManagerList(
+    {required Style style,
+    required Widget widgetOld,
+    onTap,
+    props = const ButtonProps()}) {
+  Widget widget = paddingManager(style: style, widget: widgetOld);
+  widget = sizeManager(style: style, widget: widget);
+  widget = positionManager(style: style, widget: widget);
+  widget = decorationManager(style: style, widget: widget);
+  widget =
+      clickManager(style: style, widget: widget, onTap: onTap, props: props);
+  widget = marginManager(style: style, widget: widget);
+  widget = centerManager(style: style, widget: widget);
+  widget = expandManager(style: style, widget: widget);
+  widget = alignManager(style: style, widget: widget);
   return widget;
 }

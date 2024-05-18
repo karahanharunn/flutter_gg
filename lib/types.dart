@@ -35,8 +35,8 @@ class Style {
   final double borderRadiusBottomRight;
   final double? height;
   final double? width;
-  final MainAxisAlignment mainAxisAlignment;
-  final CrossAxisAlignment crossAxisAlignment;
+  final MainAxisAlignment? mainAxisAlignment;
+  final CrossAxisAlignment? crossAxisAlignment;
   final FlexDirection? direction;
   final bool? isRounded;
   final bool? isCenter;
@@ -46,48 +46,59 @@ class Style {
   final bool? pressEffect;
   final Color? hoverColor;
   final Color? activeColor;
+  final Color? color;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final FontStyle? fontStyle;
+  final double? letterSpacing;
 
-  Style(
-      {this.px,
-      this.py,
-      this.pb,
-      this.pt,
-      this.pl,
-      this.pr,
-      this.p,
-      this.m,
-      this.mx,
-      this.my,
-      this.mr,
-      this.ml,
-      this.mt,
-      this.mb,
-      this.bg,
-      this.left,
-      this.right,
-      this.top,
-      this.bottom,
-      this.boxShadow,
-      this.gradient,
-      this.border,
-      this.borderRadius = 0.0,
-      this.borderRadiusTopLeft = 0.0,
-      this.borderRadiusTopRight = 0.0,
-      this.borderRadiusBottomLeft = 0.0,
-      this.borderRadiusBottomRight = 0.0,
-      this.height,
-      this.width,
-      this.mainAxisAlignment = MainAxisAlignment.start,
-      this.crossAxisAlignment = CrossAxisAlignment.start,
-      this.direction,
-      this.isRounded,
-      this.isCenter,
-      this.isExpanded,
-      this.alignment,
-      this.textStyle,
-      this.pressEffect,
-      this.hoverColor,
-      this.activeColor});
+  Style({
+    this.px,
+    this.py,
+    this.pb,
+    this.pt,
+    this.pl,
+    this.pr,
+    this.p,
+    this.m,
+    this.mx,
+    this.my,
+    this.mr,
+    this.ml,
+    this.mt,
+    this.mb,
+    this.bg,
+    this.left,
+    this.right,
+    this.top,
+    this.bottom,
+    this.boxShadow,
+    this.gradient,
+    this.border,
+    this.borderRadius = 0.0,
+    this.borderRadiusTopLeft = 0.0,
+    this.borderRadiusTopRight = 0.0,
+    this.borderRadiusBottomLeft = 0.0,
+    this.borderRadiusBottomRight = 0.0,
+    this.height,
+    this.width,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
+    this.direction,
+    this.isRounded,
+    this.isCenter,
+    this.isExpanded,
+    this.alignment,
+    this.textStyle,
+    this.pressEffect,
+    this.hoverColor,
+    this.activeColor,
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+    this.fontStyle,
+    this.letterSpacing,
+  });
 }
 
 class SpaceProps {
