@@ -63,6 +63,16 @@ Widget decorationManager({required Style style, required Widget widget}) {
   return widget;
 }
 
+Widget constraintManager({required Style style, required Widget widget}) {
+  if (style.minWidth != null ||
+      style.maxWidth != null ||
+      style.minHeight != null ||
+      style.maxHeight != null) {
+    return constraint(widget, style);
+  }
+  return widget;
+}
+
 Widget clickManager(
     {required Style style,
     required Widget widget,
@@ -87,6 +97,11 @@ Widget expandManager({required Style style, required Widget widget}) {
   return widget;
 }
 
+Widget opacityManager({required Style style, required Widget widget}) {
+  if (style.opacity != null) return opacity(widget, style.opacity!);
+  return widget;
+}
+
 Widget runManagerList(
     {required Style style,
     required Widget widgetOld,
@@ -96,8 +111,10 @@ Widget runManagerList(
   widget = sizeManager(style: style, widget: widget);
   widget = positionManager(style: style, widget: widget);
   widget = decorationManager(style: style, widget: widget);
+  widget = constraintManager(style: style, widget: widget);
   widget =
       clickManager(style: style, widget: widget, onTap: onTap, props: props);
+  widget = opacityManager(style: style, widget: widget);
   widget = marginManager(style: style, widget: widget);
   widget = centerManager(style: style, widget: widget);
   widget = expandManager(style: style, widget: widget);

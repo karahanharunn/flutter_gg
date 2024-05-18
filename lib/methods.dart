@@ -35,6 +35,10 @@ Widget expanded(Widget widget) {
   return Expanded(child: widget);
 }
 
+Widget opacity(Widget widget, double opacity) {
+  return Opacity(opacity: opacity, child: widget);
+}
+
 Widget decoration(Widget widget, Style props) {
   BoxDecoration decoration = BoxDecoration();
   bool isRadiusExist = props.borderRadius > 0 ||
@@ -98,6 +102,18 @@ Widget position(
     right: right,
     top: top,
     bottom: bottom,
+    child: widget,
+  );
+}
+
+Widget constraint(Widget widget, Style props) {
+  return ConstrainedBox(
+    constraints: BoxConstraints(
+      minWidth: props.minWidth ?? 0,
+      maxWidth: props.maxWidth ?? double.infinity,
+      minHeight: props.minHeight ?? 0,
+      maxHeight: props.maxHeight ?? double.infinity,
+    ),
     child: widget,
   );
 }
