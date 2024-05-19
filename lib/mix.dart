@@ -54,6 +54,16 @@ Style mixStyles(List<Style> styles) {
       mainAxisAlignment: style.mainAxisAlignment,
       direction: style.direction,
       pressEffect: style.pressEffect ?? result.pressEffect,
+      color: style.color ?? result.color,
+      fontSize: style.fontSize ?? result.fontSize,
+      fontWeight: style.fontWeight ?? result.fontWeight,
+      letterSpacing: style.letterSpacing ?? result.letterSpacing,
+      fontStyle: style.fontStyle ?? result.fontStyle,
+      maxHeight: style.maxHeight ?? result.maxHeight,
+      maxWidth: style.maxWidth ?? result.maxWidth,
+      minHeight: style.minHeight ?? result.minHeight,
+      minWidth: style.minWidth ?? result.minWidth,
+      opacity: style.opacity ?? result.opacity,
     );
   }
 

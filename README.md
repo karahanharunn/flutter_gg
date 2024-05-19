@@ -8,7 +8,19 @@ An widget manager package which makes adding properties easy.
 
 ## Getting Started
 
-This package is simple to use. Every single param can be sent within Style property.
+The package will provide easier and modular styling experience in Flutter. Each param can be sent using Style property.
+
+To install the package 
+
+flutter pub add flutter_gg ( https://pub.dev/packages/flutter_gg )
+
+To import the package within your dart file
+
+import 'package:flutter_gg/gg.dart';
+
+Access to the example project
+
+https://github.com/karahanharunn/flutter_gg_card
 
 ## Properties Style class have:
 
@@ -54,8 +66,18 @@ This package is simple to use. Every single param can be sent within Style prope
 | pressEffect             | **bool?**               | Sets whether the widget should have a press effect                |
 | hoverColor              | **Color?**              | Sets the color when the widget is hovered                         |
 | activeColor             | **Color?**              | Sets the color when the widget is active                          |
+| minWidth                | **double?**             | Sets the minimum width                                            |
+| maxWidth                | **double?**             | Sets the maximum width                                            |
+| minHeight               | **double?**             | Sets the minimum height                                           |
+| maxHeight               | **double?**             | Sets the maximum height                                           |
+| color                   | **Color?**              | Sets the color                                                    |
+| fontSize                | **double?**             | Sets the font size                                                |
+| fontWeight              | **FontWeight?**         | Sets the font weight                                              |
+| fontStyle               | **FontStyle?**          | Sets the font style                                               |
+| letterSpacing           | **double?**             | Sets the letter spacing                                           |
+| opacity                 | **double?**             | Sets the opacity                                                  |
 
-# Available **Properties gg widgets**
+# Available **GG Widgets**
 
 ## gg
 
@@ -70,7 +92,7 @@ home: Scaffold(
 
 ## ggtext
 
-```
+```dart
 home: Scaffold(
     body:  ggtext(
                 text: settingsGroupTitle!,
@@ -82,7 +104,7 @@ home: Scaffold(
 
 ## ggbutton
 
-```
+```dart
 home: Scaffold(
     body:  ggbutton(
                 text: "test",
@@ -100,9 +122,36 @@ home: Scaffold(
 
 ```
 
-# Using Multiple Styles
+## ggicon
+
+```dart
+home: Scaffold(
+    body:  ggicon(
+              Icons.search,
+              style: Style(alignment: Alignment.topRight, m: 12),
+              color: Colors.white,
+              size: 24,
+            ),
+)
 
 ```
+
+# What if you are using different widget
+
+There is two different solutions. You can either wrap your widget with gg widget or you can use styles function. ( Be sure you imported flutter_gg package in your dart file.)
+
+
+```dart
+home: Scaffold(
+    body: TextField().styles(css.input()),
+)
+
+```
+
+
+# Using Multiple Styles
+
+```dart
 home: Scaffold(
     body:  gg(
               style: mixStyles([css.card(), css.bgred()]),
@@ -168,7 +217,7 @@ home: Scaffold(
 - activeColor
 - textStyle
 
-```
+```dart
 home: Scaffold(
     body:   ggbutton(
                 text: "test",
@@ -193,7 +242,7 @@ home: Scaffold(
 - top
 - bottom
 
-```
+```dart
 home: Scaffold(
     body: gg(children: [
               Icon(
@@ -212,7 +261,7 @@ home: Scaffold(
 - crossAxisAlignment
 - mainAxisAlignment
 
-```
+```dart
 home: Scaffold(
     body: gg(children: [
               Icon(
@@ -236,7 +285,7 @@ home: Scaffold(
 - borderRadiusBottomLeft
 - borderRadiusBottomRight
 
-```
+```dart
 home: Scaffold(
     body: gg(children: [
               Icon(
@@ -247,4 +296,35 @@ home: Scaffold(
         ], style:  style: Style(p: 15, border: Border.all(width: 1, color: Colors.red)),
 )
 
+```
+
+## TextStyle
+
+- color
+- fontSize
+- fontWeight
+- fontStyle
+- letterSpacing
+
+```dart
+home: Scaffold(
+    body: ggbutton(
+            onTap: (){print("discover");},
+            style: Style(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold), text:"Discover"),
+)
+```
+
+## Size
+
+- width
+- height
+- minWidth
+- minHeight
+- maxWidth
+- maxHeight
+
+```dart
+home: Scaffold(
+    body: gg(style: Style(bg: Colors.red, width: 150, height:  150, maxHeight: 120)),
+)
 ```
