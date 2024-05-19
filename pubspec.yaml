@@ -1,7 +1,7 @@
 name: flutter_gg
 description: "Flutter gg project was designed to make styling easier and moduler in Flutter. That way, you won't need to create multiple widget files to manage styling"
 repository: https://github.com/karahanharunn/flutter_gg
-version: 0.0.2
+version: 0.0.3
 homepage:
 
 environment:
