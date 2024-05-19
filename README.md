@@ -16,7 +16,9 @@ flutter pub add flutter_gg ( https://pub.dev/packages/flutter_gg )
 
 To import the package within your dart file
 
+```dart
 import 'package:flutter_gg/gg.dart';
+```
 
 Access to the example project
 
@@ -81,7 +83,7 @@ https://github.com/karahanharunn/flutter_gg_card
 
 ## gg
 
-```
+```dart
 home: Scaffold(
     body:  gg(
               style: css.card(),
@@ -174,7 +176,7 @@ home: Scaffold(
 
 ## Example: Padding
 
-```
+```dart
 home: Scaffold(
     body: gg(children: [
               Icon(
@@ -197,7 +199,7 @@ home: Scaffold(
 - mb
 - m
 
-```
+```dart
 home: Scaffold(
     body: gg(children: [
               Icon(
